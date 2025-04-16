@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8">
+  <title>உங்களுக்கான காதல் செய்தி 💌</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    .message-box {
+      background: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      max-width: 90%;
+      text-align: center;
+      font-size: 20px;
+      color: #333;
+      line-height: 1.6;
+      animation: fadeIn 2s ease;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    /* Hearts floating */
+    .heart {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: float 4s ease-in infinite;
+      z-index: 1;
+    }
+
+    .heart::before, .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {opacity: 1; transform: translateY(0) rotate(45deg);}
+      100% {opacity: 0; transform: translateY(-600px) rotate(45deg);}
+    }
+
+    /* Confetti (Cracker Burst Style) */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background-color: gold;
+      z-index: 1;
+      animation: confetti-fall 5s linear infinite;
+    }
+
+    @keyframes confetti-fall {
+      0% {transform: translateY(-10px) rotate(0);}
+      100% {transform: translateY(100vh) rotate(720deg);}
+    }
+  </style>
+</head>
+<body>
+  <div class="message-box" id="message">
+    💬 உங்கள் காதல் செய்தியை தரவிறக்குகிறோம்...
+
+  </div>
+  <br><hr>
+  
+  <script>
+    function decodeMessage(encoded) {
+      try {
+        return decodeURIComponent(escape(window.atob(encoded)));
+      } catch (e) {
+        try {
+          return decodeURIComponent(encoded);
+        } catch {
+          return "❤️ மன்னிக்கவும்! செய்தி தவறாக இருக்கலாம்.";
+        }
+      }
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const encodedPara = params.get("para");
+
+    const message = decodeMessage(encodedPara || "");
+    document.getElementById("message").innerText = message +" \n A small anniversay gift by Sivabalan and Vidhya";
+
+    // Floating heart animation
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.top = "100%";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }, 400);
+
+    // Confetti animation (cracker style)
+    setInterval(() => {
+      const confetti = document.createElement("div");
+      confetti.className = "confetti";
+      confetti.style.left = Math.random() * window.innerWidth + "px";
+      confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 60%)`;
+      confetti.style.animationDuration = 3 + Math.random() * 2 + "s";
+      document.body.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 6000);
+    }, 300);
+  </script>
+</body>
+</html>

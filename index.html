@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8">
+  <title>திருமண நாளுக்கான அன்பான நினைவு</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      color: white;
+      text-align: center;
+      background: transparent;
+      overflow-x: hidden;
+      height: 100%;
+    }
+
+    video {
+     position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
+  object-fit: cover;
+    }
+
+    .container {
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+    select, button {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 10px;
+      margin: 10px;
+    }
+
+    .heart, .cracker {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: float 3s ease-in infinite;
+    }
+
+    .heart::before, .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+      100% { transform: translateY(-600px) rotate(45deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <video autoplay muted loop>
+    <source src="https://cdn.pixabay.com/video/2023/09/29/182810-869773948_tiny.mp4" type="video/mp4">
+  </video>
+
+  <div class="container">
+    <h1>திருமண நாள் வாழ்த்துகள்! 💕</h1>
+
+    <label>தயவு செய்து ஒருவர் தேர்வு செய்யவும்:</label><br>
+    <select id="person" onchange="loadQuestions()">
+      <option value="">--தேர்வு செய்யவும்--</option>
+      <option value="sundaram">சுந்தரம் (அவள்)</option>
+      <option value="tamilarasan">தமிழரசன் (அவன்)</option>
+    </select>
+
+    <div id="questions" style="display:none;">
+      <br>
+      <label>அவர் எப்படி புரிந்துகொண்டார்?</label><br>
+      <select id="q1">
+        <option value="அவள் எப்போதும் அவரை கவனிக்கிறாள்">அவள் எப்போதும் கவனிக்கிறாள்</option>
+        <option value="அவள் அவருடைய அமைதியால் காதலிக்கிறாள்">அமைதியால் காதல்</option>
+      </select><br><br>
+
+      <label>அவரை எவ்வளவு காதலிக்கிறீர்கள்?</label><br>
+      <select id="q2">
+        <option value="முழு உலகத்தையும் விட அதிகம்">முழு உலகம்</option>
+        <option value="தினமும் அதிகரிக்கிறது">தினமும் அதிகரிக்கிறது</option>
+      </select><br><br>
+
+      <label>நீங்கள் அவருக்கு என்ன கொடுக்க விரும்புகிறீர்கள்?</label><br>
+      <select id="q3">
+        <option value="இனிப்பு மற்றும் அன்பு">இனிப்பு மற்றும் அன்பு</option>
+        <option value="சமையல் மற்றும் கவனிப்பு">சமையல் மற்றும் கவனிப்பு</option>
+      </select><br><br>
+
+      <button onclick="molimatram()"> Click here - உங்கள் அன்பை அவருடன் பகிர்ந்து கொள்ளுங்கள்</button>
+    </div>
+  </div>
+
+  <script>
+    function loadQuestions() {
+      const person = document.getElementById('person').value;
+      if (person) {
+        document.getElementById('questions').style.display = 'block';
+      } else {
+        document.getElementById('questions').style.display = 'none';
+      }
+    }
+
+    function molimatram() {
+      const person = document.getElementById('person').value;
+      const q1 = document.getElementById('q1').value;
+      const q2 = document.getElementById('q2').value;
+      const q3 = document.getElementById('q3').value;
+
+      let para = "";
+
+   if (person === "sundaram") {
+  para = `தமிழரசனை பற்றி சுந்தரம் பகிர்ந்த உணர்வுகள்: "${q1} என அவர் எப்போதும் புரிந்து கொண்டார். ${q2} எனும் அளவில் என் காதல் அவரது மீது கொண்டேன். ${q3} என்பதை அன்புடன் அவருக்கு அளிக்க விரும்புகிறேன்."`;
+} else {
+  para = `சுந்தரத்தை பற்றி தமிழரசன் பகிர்ந்த நினைவுகள்: "${q1} என அவர் என்னை எப்போதும் புரிந்து கொண்டாள். ${q2} எனும் அளவில் என் காதல் அவரது மீது அதிகரிக்கிறது. ${q3} என்பதை அன்போடு அவருக்கு அளிக்க விரும்புகிறேன்."`;
+}
+
+
+      try {
+        const encoded = btoa(unescape(encodeURIComponent(para)));
+        const link = `https://yourdomain.com/para.html?para=${para}`;
+      const whatsappURL = `https://wa.me/?text=${encodeURIComponent(link)}`;
+      window.open(whatsappURL, '_blank');
+
+      } catch (e) {
+        // fallback
+        window.location.href = `para.html?para=${encodeURIComponent(para)}`;
+      }
+    }
+
+    // Animation: Floating hearts
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.top = '100%';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 4000);
+    }, 500);
+  </script>
+</body>
+</html>
