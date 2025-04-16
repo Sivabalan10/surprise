@@ -115,7 +115,7 @@
     const params = new URLSearchParams(window.location.search);
     const encodedPara = params.get("para");
 
-    const message = encodedPara;
+    const message = decodeMessage(encodedPara);
     document.getElementById("message").innerText = message +" \n A small anniversay gift by Sivabalan and Vidhya";
 
     // Floating heart animation
