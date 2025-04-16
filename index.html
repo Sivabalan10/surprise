@@ -145,7 +145,7 @@
       try {
         const encoded = btoa(unescape(encodeURIComponent(para)));
         const link = `https://sivabalan10.github.io/surprise/para.html?para=${encodeURIComponent(para)}`;
-      const whatsappURL = `https://wa.me/?text=${encodeURIComponent(link)}`;
+      const whatsappURL = `https://wa.me/?text=${"Open the link the view the surprise "${encodeURIComponent(link)}}`;
       window.open(whatsappURL, '_blank');
 
       } catch (e) {
